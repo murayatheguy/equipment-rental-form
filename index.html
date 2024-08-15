@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Equipment Rental</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1, h2 {
+            text-align: center;
+            color: #333;
+        }
+        form {
+            display: grid;
+            gap: 20px;
+        }
+        label {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        input, select, textarea {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .terms {
+            display: flex;
+            align-items: center;
+        }
+        .terms input {
+            margin-right: 10px;
+        }
+        .total-cost {
+            font-weight: bold;
+            color: #4CAF50;
+            font-size: 1.2em;
+        }
+        .submit-btn {
+            padding: 15px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+        }
+        .submit-btn:hover {
+            background-color: #45a049;
+        }
+        .equipment-category {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+        .equipment-category div {
+            flex: 1 1 calc(33.333% - 20px);
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .equipment-category img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+        .equipment-category p {
+            margin: 10px 0 0;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Equipment Rental</h1>
+
+    <form id="rentalForm">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="contact">Contact Info:</label>
+        <input type="text" id="contact" name="contact" required>
+
+        <label for="startDate">Start Date (YYYY-MM-DD):</label>
+        <input type="date" id="startDate" name="startDate" required>
+
+        <label for="endDate">End Date (YYYY-MM-DD):</label>
+        <input type="date" id="endDate" name="endDate" required>
+
+        <label for="equipment">Equipment:</label>
+        <select id="equipment" name="equipment" required>
+            <option value="Lightweight Mobility Scooter">Lightweight Mobility Scooter</option>
+            <option value="Heavyweight Mobility Scooter">Heavyweight Mobility Scooter</option>
+            <option value="Ultralight Mobility Scooter">Ultralight Mobility Scooter</option>
+            <option value="Lightweight Wheelchair">Lightweight Wheelchair</option>
+            <option value="Standard Wheelchair">Standard Wheelchair</option>
+            <option value="Extrawide Wheelchair">Extrawide Wheelchair</option>
+            <option value="Baby Stroller">Baby Stroller</option>
+            <option value="Snoo Bassinet">Snoo Bassinet</option>
+            <option value="Oxygen Concentrator">Oxygen Concentrator</option>
+            <option value="Hospital Bed">Hospital Bed</option>
+            <option value="Hoyer Lift">Hoyer Lift</option>
+            <option value="Transport Chair">Transport Chair</option>
+            <option value="Knee Scooter">Knee Scooter</option>
+        </select>
+
+        <label for="dropoffAddress">Drop-off Address:</label>
+        <input type="text" id="dropoffAddress" name="dropoffAddress" required>
+
+        <label for="pickupAddress">Pickup Address:</label>
+        <input type="text" id="pickupAddress" name="pickupAddress" required>
+
+        <label for="additionalInfo">Additional Information:</label>
+        <textarea id="additionalInfo" name="additionalInfo"></textarea>
+
+        <div class="terms">
+            <input type="checkbox" id="terms" name="terms" required>
+            <label for="terms">I accept the terms and conditions</label>
+        </div>
+
+        <div class="total-cost" id="totalCost">Total Cost: $0</div>
+
+        <button type="button" class="submit-btn" onclick="calculateCost()">Calculate Cost</button>
+        <button type="submit" class="submit-btn">Submit</button>
+    </form>
+</div>
+
+<div class="container">
+    <h2>Our Equipment</h2>
+    <div class="equipment-category">
+        <div>
+            <img src="https://source.unsplash.com/1600x900/?mobility,scooter" alt="Lightweight Mobility Scooter">
+            <p><strong>Lightweight Mobility Scooter:</strong> Easy to transport and maneuver, perfect for daily use.</p>
+        </div>
+        <div>
+            <img src="https://source.unsplash.com/1600x900/?mobility,scooter" alt="Heavyweight Mobility Scooter">
+            <p><strong>Heavyweight Mobility Scooter:</strong> Durable and robust, ideal for outdoor use.</p>
+        </div>
+        <div>
+            <img src="https://source.unsplash.com/1600x900/?mobility,scooter" alt="Ultralight Mobility Scooter">
+            <p><strong>Ultralight Mobility Scooter:</strong> Extremely light and portable, convenient for travel.</p>
+        </div>
+        <div>
+            <img src="https://source.unsplash.com/1600x900/?wheelchair" alt="Lightweight Wheelchair">
+            <p><strong>Lightweight Wheelchair:</strong> Easy to fold and store, great for everyday use.</p>
+        </div>
+        <div>
+            <img src="https://source.unsplash.com/1600x900/?wheelchair" alt="Standard Wheelchair">
+            <p><strong>Standard Wheelchair:</strong> Reliable and comfortable, suitable for most users.</p>
+        </div>
+        <div>
+            <img src="https://source.unsplash.com/1600x900/?wheelchair" alt="Extrawide Wheelchair">
+            <p><strong>Extrawide Wheelchair:</strong> Provides extra space for enhanced comfort.</p>
+        </div>
+        <div>
+            <img src="https://source.unsplash.com/1600x900/?stroller" alt="Baby Stroller">
+            <p><strong>Baby Stroller:</strong> Safe and comfortable, designed for infants and toddlers.</p>
+        </div>
+        <div>
+            <img src="https://source.unsplash.com/1600x900/?bassinet" alt="Snoo Bassinet">
+            <p><strong>Snoo Bassinet:</strong> Smart bassinet that soothes your baby to sleep.</p>
+        </div>
+        <div>
+            <img src="https://source.unsplash.com/1600x900/?hospital,bed" alt="Hospital Bed">
+            <p><strong>Hospital Bed:</strong> Adjustable bed to meet various medical needs.</p>
+        </div>
+        <div>
+            <img src="https://source.unsplash.com/1600x900/?oxygen,concentrator" alt="Oxygen Concentrator">
+            <p><strong>Oxygen Concentrator:</strong> Provides reliable oxygen supply for medical needs.</p>
+        </div>
+        <div>
+            <img src="https://source.unsplash.com/1600x900/?lift" alt="Hoyer Lift">
+            <p><strong>Hoyer Lift:</strong> Assists in safe patient transfers.</p>
+        </div>
+        <div>
+            <img src="https://source.unsplash.com/1600x900/?wheelchair" alt="Transport Chair">
+            <p><strong>Transport Chair:</strong> Lightweight and easy to push, perfect for travel.</p>
+        </div>
+        <div>
+            <img src="https://source.unsplash.com/1600x900/?scooter" alt="Knee Scooter">
+            <p><strong>Knee Scooter:</strong> Provides mobility during lower leg injuries.</p>
+        </div>
+    </div>
+</div>
+
+<script>
+function calculateCost() {
+    const startDate = new Date(document.getElementById('startDate').value);
+    const endDate = new Date(document.getElementById('endDate').value);
+    const name = document.getElementById('name').value;
+    const contact = document.getElementById('contact').value;
+    const terms = document.getElementById('terms').checked;
+    const dropoffAddress = document.getElementById('dropoffAddress').value;
+    const pickupAddress = document.getElementById('pickupAddress').value;
+
+    if (!name || !contact || !terms || !dropoffAddress || !pickupAddress) {
+        alert("Please fill out all fields and accept the terms and conditions.");
+        return;
+    }
+
+    if (isNaN(startDate) || isNaN(endDate)) {
+        alert("Please enter valid dates.");
+        return;
+    }
+
+    const rentalDays = (endDate - startDate) / (1000 * 60 * 60 * 24) + 1;
+
+    if (rentalDays < 1) {
+        alert("End date must be after start date.");
+        return;
+    }
+
+    const cost = 20 + Math.max(0, rentalDays - 1) * 2;
+    document.getElementById('totalCost').innerText = `Total Cost: $${cost}`;
+}
+
+function initAutocomplete() {
+    const dropoffAddress = new google.maps.places.Autocomplete(
+        document.getElementById('dropoffAddress'),
+        { types: ['address'] }
+    );
+    const pickupAddress = new google.maps.places.Autocomplete(
+        document.getElementById('pickupAddress'),
+        { types: ['address'] }
+    );
+}
+
+document.getElementById('rentalForm').addEventListener('submit', function(event) {
+    calculateCost();
+    alert("Your rental request has been submitted.");
+    event.preventDefault();
+});
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDyirVfJn5egxMgd-hulMpJ0hcUgDQJXcw&libraries=places&callback=initAutocomplete"
+        async defer></script>
+
+</body>
+</html>
